@@ -23,15 +23,20 @@ export default function Admin_Complain() {
   const [state] = useContext(AuthContext);
 
   useEffect(() => {
-    socket = io("http://localhost:5000", {
-      auth: {
-        token: localStorage.getItem("token"),
-      },
+    socket = io(
+      process.env.REACT_APP_SERVER_URL ||
+        "https://dumbmerch-app-backend.herokuapp.com/" ||
+        "http://localhost:5000",
+      {
+        auth: {
+          token: localStorage.getItem("token"),
+        },
 
-      query: {
-        id: state.user.id,
-      },
-    });
+        query: {
+          id: state.user.id,
+        },
+      }
+    );
 
     socket.on("new message", () => {
       console.log("contact : ", contact);

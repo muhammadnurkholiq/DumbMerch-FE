@@ -76,10 +76,7 @@ export default function Customer_Profile() {
 
       // data
       const formData = new FormData();
-      if (
-        form.image !== "http://localhost:5000/uploads/profile/null" &&
-        form.image !== image.image
-      ) {
+      if (form.image) {
         formData.set("image", form.image[0], form.image[0].name);
       }
       formData.set("name", form.name);
@@ -136,7 +133,7 @@ export default function Customer_Profile() {
               </div>
               <div className="myProfile-details">
                 {/* profile image  */}
-                {form.image === "http://localhost:5000/uploads/profile/null" ? (
+                {form.image === null ? (
                   <>
                     {preview && (
                       <div className="profile-image">
@@ -245,7 +242,7 @@ export default function Customer_Profile() {
               </div>
               <div className="myProfile-details">
                 {/* profile image  */}
-                {form.image === "http://localhost:5000/uploads/profile/null" ? (
+                {form.image === null ? (
                   <div className="profile-image">
                     <img src={Avatar} alt={form.name} />
                   </div>
