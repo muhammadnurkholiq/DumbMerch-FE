@@ -1,0 +1,418 @@
+/* profile container  */
+.profile .container {
+  width: 90%;
+  margin: 4vh auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.profile .container .myProfile {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile .container .myProfile .MyProfile-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profile .MyProfile-header .btn-profile {
+  width: 10vw;
+  height: 5vh;
+  box-shadow: none;
+  border: none;
+  outline: none;
+  font-weight: 400;
+  margin-right: 2vw;
+}
+
+.profile .MyProfile-header .btn-edit {
+  background-color: #f74d4d;
+}
+
+.profile .MyProfile-header .btn-edit:hover {
+  background-color: #d24141;
+}
+
+.profile .MyProfile-header .btn-submit {
+  background-color: #f74d4d;
+}
+
+.profile .MyProfile-header .btn-submit:hover {
+  background-color: #d24141;
+}
+
+.profile .MyProfile-header .btn-cancel {
+  background-color: #fff;
+  color: black;
+}
+
+.profile .MyProfile-header .btn-cancel:hover {
+  background-color: rgb(223, 222, 222);
+}
+
+.profile .MyProfile-header .profile-title {
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 33px;
+  color: #f74d4d;
+}
+
+/* profile myProfile */
+.profile .container .myProfile {
+  width: 58%;
+  margin-right: 1.5vw;
+  padding: 1vh 0.1vw;
+  border-right: 1px solid #fff;
+}
+
+/* profile myProfile-details */
+.profile .container .myProfile-details {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5vh;
+}
+
+.profile .container .myProfile-details .profile-image {
+  width: 50%;
+  height: 60vh;
+  padding-right: 2vw;
+}
+
+.profile .container .myProfile-details .profile-image img {
+  min-width: 100%;
+  max-width: 100%;
+  height: 100%;
+}
+
+/* form  */
+.profile .container form {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.profile .container form .profile-image {
+  width: 50%;
+  height: 60vh;
+}
+
+.profile .container form .profile-image label {
+  position: absolute;
+  z-index: 1;
+  width: 22.4vw;
+  height: 60vh;
+  background-color: red;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: 0.5s;
+}
+.profile .container form .profile-image label h1 {
+  font-weight: 800;
+  font-size: 60px;
+  letter-spacing: 0.5vw;
+  text-transform: uppercase;
+}
+
+.profile .container form .profile-image label:hover {
+  cursor: pointer;
+  opacity: 80%;
+}
+
+.profile .container form .profile-image img {
+  min-width: 100%;
+  position: relative;
+  max-width: 100%;
+  height: 100%;
+}
+
+.profile .container form .profile-datas {
+  width: 50%;
+  padding-right: 2vw;
+}
+
+.profile .container form input {
+  width: 100%;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25px;
+  background: rgba(210, 210, 210, 0.25) !important;
+  color: #fff !important;
+  border: 2px solid #bcbcbc;
+  border-radius: 5px;
+  padding: 10px !important;
+  margin-bottom: -2vh;
+}
+
+.profile .container form input:disabled {
+  background: rgba(31, 30, 30, 0.25) !important;
+  color: #fff !important;
+}
+
+.profile .container form select {
+  width: 100%;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25px;
+  background: rgba(210, 210, 210, 0.25) !important;
+  color: #fff !important;
+  border: 2px solid #bcbcbc;
+  border-radius: 5px;
+  padding: 10px !important;
+  margin-bottom: -2vh;
+}
+
+.profile .container form select.form-control {
+  -webkit-appearance: menulist;
+}
+
+.profile .container form select option {
+  background-color: grey;
+  font-size: 20px;
+}
+
+.profile .container form textarea {
+  width: 100%;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25px;
+  background: rgba(210, 210, 210, 0.25) !important;
+  color: #fff !important;
+  border: 2px solid #bcbcbc;
+  border-radius: 5px;
+  padding: 10px !important;
+  margin-bottom: -5vh;
+  resize: none;
+}
+
+.profile .container .myProfile-details .profile-datas .profile-data {
+  margin-bottom: 4vh;
+  min-height: 8.9vh;
+}
+
+.profile .container .myTransaction .transaction-list .noTransaction {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile .container .myProfile-details .profile-datas .data-title {
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 25px;
+  color: #f74d4d;
+  margin-bottom: 1vh;
+}
+
+.profile .container .myProfile-details .profile-datas .data-value {
+  font-style: normal;
+  font-size: 17px;
+  font-weight: lighter;
+  line-height: 25px;
+  color: #fff;
+  text-align: left;
+}
+
+/* profile myTransaction */
+.profile .container .myTransaction {
+  width: 40%;
+}
+
+.profile .container .myTransaction .transaction-title {
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 33px;
+  color: #f74d4d;
+  text-align: center;
+}
+
+.profile .container .myTransaction .transaction-list {
+  margin-top: 5vh;
+  height: 69vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 1vw;
+}
+
+.profile .container .myTransaction .card {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 19vh;
+  border: none;
+  background-color: #1a1a1a;
+  margin-bottom: 1.5vh;
+  box-shadow: 0px 0px 5px 0px black;
+  padding: 1vh 0;
+}
+
+/* transaction-data */
+.profile .container .myTransaction .card .transaction-data {
+  display: flex;
+  flex-direction: row;
+  width: 75%;
+}
+
+.profile .container .myTransaction .card .transaction-data .transaction-img {
+  width: 35%;
+  padding: 1vh 1vw;
+  overflow: hidden;
+}
+
+.profile
+  .container
+  .myTransaction
+  .card
+  .transaction-data
+  .transaction-product-img {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.profile
+  .container
+  .myTransaction
+  .card
+  .transaction-data
+  .transaction-img
+  img {
+  width: 170%;
+  height: 100%;
+  transform: translateX(-1.7vw);
+}
+
+.profile
+  .container
+  .myTransaction
+  .card
+  .transaction-data
+  .transaction-details {
+  width: 70%;
+  padding: 1vh 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile
+  .container
+  .myTransaction
+  .card
+  .transaction-data
+  .transaction-details
+  .data-1
+  .data-name {
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 19px;
+  color: #f74d4d;
+  letter-spacing: 1px;
+}
+
+.profile
+  .container
+  .myTransaction
+  .card
+  .transaction-data
+  .transaction-details
+  .data-1
+  .data-date {
+  font-weight: 900;
+  font-size: 9px;
+  line-height: 12px;
+  color: #f74d4d;
+}
+
+.profile
+  .container
+  .myTransaction
+  .card
+  .transaction-data
+  .transaction-details
+  .data-1
+  .data-date
+  span {
+  font-weight: 200;
+  font-size: 9px;
+  line-height: 12px;
+  color: #f74d4d;
+}
+
+.profile
+  .container
+  .myTransaction
+  .card
+  .transaction-data
+  .transaction-details
+  .data-1
+  .data-price {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 14px;
+  color: #fff;
+}
+
+.profile
+  .container
+  .myTransaction
+  .card
+  .transaction-data
+  .transaction-details
+  .data-2 {
+  margin-top: 3.5vh;
+}
+
+.profile
+  .container
+  .myTransaction
+  .card
+  .transaction-data
+  .transaction-details
+  .data-2
+  .data-subTotal {
+  font-weight: 900;
+  font-size: 10px;
+  color: #fff;
+}
+
+.profile
+  .container
+  .myTransaction
+  .transaction-list
+  .card
+  .status-transaction-success {
+  background-color: rgb(25, 170, 51);
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 80%;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.profile
+  .container
+  .myTransaction
+  .transaction-list
+  .card
+  .status-transaction-pending {
+  background-color: #f00000;
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 80%;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}

@@ -1,0 +1,47 @@
+.guestNavbar .navbar .container .navbar-brand {
+  width: 70px;
+  height: 70px;
+}
+
+.guestNavbar .navbar .container .navbar-brand img {
+  width: 100%;
+  margin-top: -0.6vh;
+}
+
+.guestNavbar .navbar .container .navbar-nav a {
+  color: #fff;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: right;
+  margin-left: 0.5vw;
+}
+
+.guestNavbar .navbar .container .navbar-nav a.active {
+  color: #f74d4d;
+}
+
+.guestNavbar .navbar .container .navbar-nav .nav-logout {
+  color: #fff;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: right;
+  margin-left: 0.5vw;
+  background-color: transparent;
+  border: none;
+}
+
+.guestNavbar .navbar .container .navbar-nav .nav-logout:focus {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.guestNavbar .navbar .container .navbar-nav .nav-logout:active {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  box-shadow: none;
+}

@@ -1,0 +1,99 @@
+/* main  */
+.auth .container .text-auth-header {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 56px;
+  line-height: 76px;
+}
+
+.auth .container .text-auth-parag {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25px;
+  color: #6a6a6a;
+}
+
+.auth .container .text-auth-parag b {
+  font-weight: 800;
+}
+
+.auth .container .btn {
+  color: #fff;
+}
+
+.auth .container .btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.auth .container .btn-login {
+  background-color: #f74d4d;
+  size: 18px;
+  line-height: 25px;
+  font-weight: 800;
+  border-radius: 5px;
+}
+
+.auth .container .btn-login:hover {
+  background-color: #d94444;
+}
+
+.auth .container .btn-register {
+  font-weight: 800;
+  size: 18px;
+  line-height: 25px;
+  color: #6a6a6a;
+  border-radius: 5px;
+}
+
+/* component - FormAuth  */
+.auth .container .FormAuth {
+  background: #181818;
+  color: #fff;
+  border-radius: 10px;
+  text-align: center;
+  width: 70%;
+  margin: auto;
+  padding: 10px;
+}
+
+.auth .container .FormAuth form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth .container .FormAuth .formTitle {
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 49px;
+}
+
+.auth .container .FormAuth form input {
+  width: 100%;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25px;
+  background: rgba(210, 210, 210, 0.25) !important;
+  color: #fff !important;
+  border: 2px solid #bcbcbc;
+  border-radius: 5px;
+  padding: 10px !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+.auth .container .FormAuth form .btn-FormAuth {
+  background-color: #f74d4d;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 25px;
+  padding: 11px;
+  border-radius: 5px;
+}
+
+.auth .container .FormAuth form .btn-FormAuth:hover {
+  background-color: #d94444;
+}

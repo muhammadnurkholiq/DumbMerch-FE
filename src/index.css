@@ -1,0 +1,71 @@
+@font-face {
+  font-family: Avenir;
+  src: url("./assets/font/Avenir.otf") format("opentype");
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Avenir !important;
+  background-color: #0b0b0b !important;
+  color: #fff !important;
+}
+
+/* react-notification */
+.notification-container {
+  width: 25vw !important;
+  font-family: Avenir !important;
+  margin-top: 10vh;
+}
+
+.notification-container .notification .notification-message .title {
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+/* pagination  */
+
+.paginationBttns {
+  padding: 10px;
+  list-style: none;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none !important;
+}
+
+.paginationBttns a {
+  padding: 10px;
+  margin: 8px;
+  border-radius: 5px;
+  background-color: #fff;
+  border: 1px solid #212121;
+  color: black !important;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.paginationBttns .previous a {
+  color: #fff !important;
+  background-color: #f74d4d;
+}
+
+.paginationBttns .previous.paginationDisabled a {
+  background-color: #3a3535;
+}
+
+.paginationBttns .next a {
+  color: #fff !important;
+  background-color: #f74d4d;
+}
+
+.paginationBttns .next.paginationDisabled a {
+  background-color: #565555;
+}
+
+.paginationBttns .paginationActive a {
+  color: #fff !important;
+  background-color: #f74d4d;
+}

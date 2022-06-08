@@ -1,0 +1,216 @@
+.product {
+  margin-top: 5vh;
+}
+
+.product .container .product-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.product .container .product-header h1 {
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 33px;
+  color: #fff;
+}
+
+.product .container .product-header button {
+  width: 10vw;
+  background-color: #f74d4d;
+  box-shadow: none;
+  border: none;
+  outline: none;
+  font-weight: 400;
+}
+
+.product .container table {
+  text-align: center;
+  color: #fff;
+  vertical-align: middle;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
+
+.product .container table thead {
+  background-color: #303030;
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.product .container table thead tr th {
+  border: none;
+  padding: 2.5vh 0;
+}
+
+.product .container table thead .table-no {
+  width: 5%;
+}
+
+.product .container table thead .table-photo {
+  width: 18%;
+}
+
+.product .container table thead .table-name {
+  width: 18%;
+}
+
+.product .container table thead .table-desc {
+  width: 22%;
+}
+
+.product .container table thead .table-price {
+  width: 10%;
+}
+
+.product .container table thead .table-qty {
+  width: 7%;
+}
+
+.product .container table thead .table-action {
+  width: 20%;
+}
+
+.product .container table tbody {
+  border-bottom: 2px solid #c4c4c4;
+}
+
+.product .container table tbody tr:hover td {
+  color: #fff;
+}
+
+.product .container table tbody tr td {
+  border-bottom: 2px solid #c4c4c4;
+  padding: 1.5vh 0;
+}
+
+.product .container table tbody tr td img {
+  width: 60%;
+}
+
+.product .container table tbody tr:nth-child(odd) {
+  background-color: #232323;
+  border-bottom: 2px solid #c4c4c4;
+}
+
+.product .container table tbody tr:nth-child(odd):hover {
+  background-color: #1b1a1a;
+}
+
+.product .container table tbody tr:nth-child(even) {
+  background-color: #303030;
+  border-bottom: 2px solid #c4c4c4;
+}
+
+.product .container table tbody tr:nth-child(even):hover {
+  background-color: #1a1a1a;
+}
+
+.product .container table tbody tr td .btn-edit {
+  width: 35%;
+  margin: 0 0.5vw;
+  background: #56c05a;
+  border-radius: 5px;
+  border: none;
+  box-shadow: none;
+}
+
+.product .container table tbody tr td .btn-edit:hover {
+  background: #3f8e42;
+  border: none;
+  box-shadow: none;
+}
+
+.product .container table tbody tr td .btn-edit:active {
+  border: none;
+  box-shadow: none;
+}
+
+.product .container table tbody tr td .btn-delete {
+  width: 35%;
+  margin: 0 0.5vw;
+  background: #f74d4d;
+  border-radius: 5px;
+  border: none;
+  box-shadow: none;
+}
+
+.product .container table tbody tr td .btn-delete:hover {
+  background: #c63e3e;
+  border: none;
+  box-shadow: none;
+}
+
+.product .container table tbody tr td .btn-delete:active {
+  border: none;
+  box-shadow: none;
+}
+
+/* modal  */
+
+.modal-dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+}
+
+.modal-content {
+  padding: 3vh 1vw;
+}
+
+.modal-content .modal-title {
+  font-weight: 900;
+  font-size: 26px;
+  line-height: 36px;
+  color: #000000;
+}
+
+.modal-content .modal-info {
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 31px;
+  color: #000000;
+  margin-top: 1vh;
+}
+
+.modal-content .modal-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 3vh;
+}
+
+.modal-content .modal-btns .btn-yes {
+  width: 25%;
+  background: #56c05a;
+  border-radius: 5px;
+  font-weight: 900;
+  font-size: 15px;
+  line-height: 25px;
+  color: #ffffff;
+  border: none;
+  box-shadow: none;
+  margin: 0vh 1vw;
+}
+
+.modal-content .modal-btns .btn-yes:hover {
+  background: #469c49;
+}
+
+.modal-content .modal-btns .btn-no {
+  width: 25%;
+  background: #f74d4d;
+  border-radius: 5px;
+  font-weight: 900;
+  font-size: 15px;
+  line-height: 25px;
+  color: #ffffff;
+  border: none;
+  box-shadow: none;
+}
+
+.modal-content .modal-btns .btn-no:hover {
+  background: #cf4040;
+  border: none;
+  box-shadow: none;
+}

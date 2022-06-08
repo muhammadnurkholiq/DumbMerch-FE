@@ -1,0 +1,9 @@
+{
+  "short_name": "DumbMerch",
+  "name": "DumbMerch",
+  "icons": {
+    "src": "ic_nav_DumbMerch.png",
+    "type": "image/png",
+    "sizes": "192x192"
+  }
+}
