@@ -258,7 +258,9 @@ export default function Customer_Profile() {
                 <div className="profile-datas">
                   <div className="profile-data">
                     <h1 className="data-title">Name</h1>
-                    <h1 className="data-value">{form.name}</h1>
+                    <h1 className="data-value">
+                      {process.env.PATH_FILE_PROFILE + "null"}
+                    </h1>
                   </div>
                   {/* profile email */}
                   <div className="profile-data">
