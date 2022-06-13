@@ -61,7 +61,11 @@ export default function Customer_HomePage() {
                           handleDetails(item.id);
                         }}
                       >
-                        <Card.Img variant="top" src={item.image} />
+                        <Card.Img
+                          variant="top"
+                          src={item.image}
+                          loading="lazy"
+                        />
                         <Card.Body>
                           <h1 className="cardTitle">{item.name}</h1>
                           <h2 className="cardPrice">

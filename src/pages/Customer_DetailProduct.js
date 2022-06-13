@@ -109,6 +109,7 @@ export default function Customer_DetailProduct() {
                 variant="top"
                 src={products.image}
                 className="img-product"
+                loading="lazy"
               />
             </Card>
           </div>

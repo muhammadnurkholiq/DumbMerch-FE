@@ -133,7 +133,8 @@ export default function Customer_Profile() {
               </div>
               <div className="myProfile-details">
                 {/* profile image  */}
-                {form.image === null ? (
+                {form.image === null ||
+                form.image === process.env.PATH_FILE_PROFILE + "null" ? (
                   <>
                     {preview && (
                       <div className="profile-image">
@@ -147,7 +148,7 @@ export default function Customer_Profile() {
                         <label for="image">
                           <h1>Upload Image</h1>
                         </label>
-                        <img src={Avatar} alt={form.name} />
+                        <img src={Avatar} alt={form.name} loading="lazy" />
                       </div>
                     )}
                   </>
@@ -165,7 +166,7 @@ export default function Customer_Profile() {
                         <label for="image">
                           <h1>Upload Image</h1>
                         </label>
-                        <img src={preview} alt={form.name} />
+                        <img src={preview} alt={form.name} loading="lazy" />
                       </div>
                     )}
                   </>
@@ -242,13 +243,14 @@ export default function Customer_Profile() {
               </div>
               <div className="myProfile-details">
                 {/* profile image  */}
-                {form.image === null ? (
+                {form.image === null ||
+                form.image === process.env.PATH_FILE_PROFILE + "null" ? (
                   <div className="profile-image">
-                    <img src={Avatar} alt={form.name} />
+                    <img src={Avatar} alt={form.name} loading="lazy" />
                   </div>
                 ) : (
                   <div className="profile-image">
-                    <img src={form.image} alt={form.name} />
+                    <img src={form.image} alt={form.name} loading="lazy" />
                   </div>
                 )}
 
@@ -301,6 +303,7 @@ export default function Customer_Profile() {
                               <img
                                 src={item.product.image}
                                 alt={item.product.name}
+                                loading="lazy"
                               />
                             </div>
                           </div>
