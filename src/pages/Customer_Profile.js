@@ -134,7 +134,8 @@ export default function Customer_Profile() {
               <div className="myProfile-details">
                 {/* profile image  */}
                 {form.image === null ||
-                form.image === process.env.PATH_FILE_PROFILE + "null" ? (
+                form.image ===
+                  "https://res.cloudinary.com/muhammad-nurkholiq/image/upload/v1654678474/null" ? (
                   <>
                     {preview && (
                       <div className="profile-image">
@@ -244,7 +245,8 @@ export default function Customer_Profile() {
               <div className="myProfile-details">
                 {/* profile image  */}
                 {form.image === null ||
-                form.image === process.env.PATH_FILE_PROFILE + "null" ? (
+                form.image ===
+                  "https://res.cloudinary.com/muhammad-nurkholiq/image/upload/v1654678474/null" ? (
                   <div className="profile-image">
                     <img src={Avatar} alt={form.name} loading="lazy" />
                   </div>
@@ -258,9 +260,7 @@ export default function Customer_Profile() {
                 <div className="profile-datas">
                   <div className="profile-data">
                     <h1 className="data-title">Name</h1>
-                    <h1 className="data-value">
-                      {process.env.PATH_FILE_PROFILE + "null"}
-                    </h1>
+                    <h1 className="data-value">{form.name}</h1>
                   </div>
                   {/* profile email */}
                   <div className="profile-data">
