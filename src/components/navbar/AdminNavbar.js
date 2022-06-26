@@ -43,9 +43,6 @@ export default function GuestNavbar() {
               <NavLink to="/adminComplain" className="nav-link">
                 Complain
               </NavLink>
-              <NavLink to="/category" className="nav-link">
-                Category
-              </NavLink>
               <NavLink to="/Product" className="nav-link">
                 Product
               </NavLink>

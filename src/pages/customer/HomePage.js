@@ -1,30 +1,43 @@
-import { useState } from "react";
-import { Container, Card, Col } from "react-bootstrap";
-import { useQuery } from "react-query";
+import { useState, useEffect } from "react";
+import { Container, Card } from "react-bootstrap";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
 import convertRupiah from "rupiah-format";
+import ReactLoading from "react-loading";
 
 // API
-import { API } from "../config/Api";
+import { API } from "../../config/Api";
 
 // css
-import "../assets/css/HomePage.css";
+import "../../assets/css/customer/HomePage.css";
 
 // image
-import imgEmpty from "../assets/images/empty.png";
+import imgEmpty from "../../assets/images/empty.png";
 
 // components
-import GuestNavbar from "../components/navbar/GuestNavbar";
+import GuestNavbar from "../../components/navbar/GuestNavbar";
 
-export default function Customer_HomePage() {
+export default function HomePage() {
   // usaNavigate
   let navigate = useNavigate();
-  // get product
-  let { data: products } = useQuery("productsCache", async () => {
-    const response = await API.get("/products");
-    return response.data.data.product;
-  });
+  // state
+  let [loading, setLoading] = useState(true);
+  let [products, setProducts] = useState([]);
+
+  // get products
+  const getProducts = async () => {
+    try {
+      const response = await API.get("/products");
+
+      if (response.data.status === "Success") {
+        setProducts(response.data.data);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
 
   // pagination
   const [pageNumber, setPageNumber] = useState(0);
@@ -40,9 +53,27 @@ export default function Customer_HomePage() {
     navigate(`/detailProduct/${id}`);
   };
 
+  useEffect(() => {
+    getProducts();
+  }, []);
+
   return (
     <>
+      {/* loading  */}
+      {loading && (
+        <div className="loadingContainer">
+          <ReactLoading
+            type="spinningBubbles"
+            color="#fff"
+            height={"20%"}
+            width={"20%"}
+            className="loading"
+          />
+        </div>
+      )}
+      {/* navbar */}
       <GuestNavbar />
+      {/* content */}
       <div className="homePage">
         <Container>
           <h1 className="homePageTitle">Product</h1>

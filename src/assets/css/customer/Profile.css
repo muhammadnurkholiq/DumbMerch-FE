@@ -283,9 +283,8 @@
   .transaction-data
   .transaction-img
   img {
-  width: 170%;
+  width: 100%;
   height: 100%;
-  transform: translateX(-1.7vw);
 }
 
 .profile

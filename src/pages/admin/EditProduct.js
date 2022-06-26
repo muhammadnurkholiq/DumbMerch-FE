@@ -1,24 +1,25 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useMutation, useQuery } from "react-query";
+import { useMutation } from "react-query";
 import { Container } from "react-bootstrap";
 import { NotificationManager } from "react-notifications";
+import ReactLoading from "react-loading";
 
 // API
-import { API } from "../config/Api";
+import { API } from "../../config/Api";
 
 // css
-import "../assets/css/EditProduct.css";
+import "../../assets/css/admin/EditProduct.css";
 
 // components
-import AdminNavbar from "../components/navbar/AdminNavbar";
+import AdminNavbar from "../../components/navbar/AdminNavbar";
 
-export default function Admin_EditProduct() {
+export default function EditProduct() {
   const { id } = useParams();
   // usaNavigate
   let navigate = useNavigate();
   // useState
-  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [preview, setPreview] = useState(null);
   const [form, setForm] = useState({
     image: "",
@@ -26,37 +27,28 @@ export default function Admin_EditProduct() {
     desc: "",
     price: "",
     qty: "",
-    category: "",
   });
 
-  // get category
-  // Fetching category data
-  const getCategories = async () => {
+  // get product
+  const getProducts = async () => {
     try {
-      const response = await API.get("/categories");
-      setCategories(response.data.data.category);
+      const response = await API.get(`/products/${id}`);
+
+      if (response.data.status === "Success") {
+        setForm({
+          name: response.data.data.name,
+          desc: response.data.data.desc,
+          price: response.data.data.price,
+          qty: response.data.data.qty,
+        });
+        setPreview(response.data.data.image);
+        setLoading(false);
+      }
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
-
-  useQuery("ProductsCache", async () => {
-    const config = {
-      method: "GET",
-      headers: {
-        Authorization: "Basic " + localStorage.token,
-      },
-    };
-    const response = await API.get(`/products/${id}`, config);
-    setForm({
-      name: response.data.data.product.name,
-      desc: response.data.data.product.desc,
-      price: response.data.data.product.price,
-      qty: response.data.data.product.qty,
-      category: response.data.data.product.categories[0].name,
-    });
-    setPreview(response.data.data.product.image);
-  });
 
   // Handle change data on form
   const handleChange = (e) => {
@@ -77,6 +69,7 @@ export default function Admin_EditProduct() {
   const handleSubmit = useMutation(async (e) => {
     try {
       e.preventDefault();
+      setLoading(true);
 
       // config
       const config = {
@@ -95,12 +88,9 @@ export default function Admin_EditProduct() {
       formData.set("desc", form.desc);
       formData.set("price", form.price);
       formData.set("qty", form.qty);
-      formData.set("category", form.category);
 
       // API add product
       const response = await API.patch(`/products/${id}`, formData, config);
-
-      console.log(response);
 
       // response
       if (response.data.status === "Success") {
@@ -109,14 +99,15 @@ export default function Admin_EditProduct() {
           response.data.status,
           3000
         );
-        console.log(response);
         navigate("/product");
+        setLoading(false);
       } else {
         NotificationManager.error(
           response.data.message,
           response.data.status,
           3000
         );
+        setLoading(false);
       }
     } catch (error) {
       NotificationManager.error("Server error", "Error", 3000);
@@ -125,12 +116,26 @@ export default function Admin_EditProduct() {
   });
 
   useEffect(() => {
-    getCategories();
+    getProducts();
   }, []);
 
   return (
     <>
+      {/* loading  */}
+      {loading && (
+        <div className="loadingContainer">
+          <ReactLoading
+            type="spinningBubbles"
+            color="#fff"
+            height={"20%"}
+            width={"20%"}
+            className="loading"
+          />
+        </div>
+      )}
+      {/* navbar */}
       <AdminNavbar />
+      {/* content */}
       <div className="editProduct">
         <Container>
           <h1>Add Product</h1>
@@ -189,25 +194,6 @@ export default function Admin_EditProduct() {
               value={form.qty}
               onChange={handleChange}
             />
-
-            <select
-              id="category"
-              name="category"
-              value={form.category}
-              onChange={handleChange}
-              required
-            >
-              <option value="" disabled selected hidden>
-                Select Category
-              </option>
-              {categories?.map((item) => (
-                <>
-                  <option className="options" value={item.name}>
-                    {item.name}
-                  </option>
-                </>
-              ))}
-            </select>
 
             <button className="btn-save">Add</button>
           </form>

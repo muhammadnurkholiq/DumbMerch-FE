@@ -3,29 +3,29 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import { Container } from "react-bootstrap";
 import { NotificationManager } from "react-notifications";
+import ReactLoading from "react-loading";
 
 // API
-import { API } from "../config/Api";
+import { API } from "../../config/Api";
 
 // css
-import "../assets/css/EditProduct.css";
+import "../../assets/css/admin/EditProduct.css";
 
 // components
-import AdminNavbar from "../components/navbar/AdminNavbar";
+import AdminNavbar from "../../components/navbar/AdminNavbar";
 
-export default function Admin_AddProduct() {
+export default function AddProduct() {
   // usaNavigate
   let navigate = useNavigate();
   // useState
-  const [categories, setCategories] = useState([]);
   const [preview, setPreview] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     image: "",
     name: "",
     desc: "",
     price: "",
     qty: "",
-    category: "",
   });
 
   // handle change value
@@ -47,9 +47,9 @@ export default function Admin_AddProduct() {
   const handleSubmit = useMutation(async (e) => {
     try {
       e.preventDefault();
+      setLoading(true);
 
       // config
-      // Configuration
       const config = {
         method: "POST",
         headers: {
@@ -64,7 +64,6 @@ export default function Admin_AddProduct() {
       formData.set("desc", form.desc);
       formData.set("price", form.price);
       formData.set("qty", form.qty);
-      formData.set("category", form.category);
 
       // API add product
       const response = await API.post("/products", formData, config);
@@ -76,6 +75,7 @@ export default function Admin_AddProduct() {
           response.data.status,
           3000
         );
+        setLoading(false);
         navigate("/product");
       } else {
         NotificationManager.error(
@@ -83,6 +83,7 @@ export default function Admin_AddProduct() {
           response.data.status,
           3000
         );
+        setLoading(false);
       }
     } catch (error) {
       NotificationManager.success(
@@ -93,24 +94,23 @@ export default function Admin_AddProduct() {
     }
   });
 
-  // get category
-  // Fetching category data
-  const getCategories = async () => {
-    try {
-      const response = await API.get("/categories");
-      setCategories(response.data.data.category);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getCategories();
-  }, []);
-
   return (
     <>
+      {/* loading  */}
+      {loading && (
+        <div className="loadingContainer">
+          <ReactLoading
+            type="spinningBubbles"
+            color="#fff"
+            height={"20%"}
+            width={"20%"}
+            className="loading"
+          />
+        </div>
+      )}
+      {/* navbar */}
       <AdminNavbar />
+      {/* content  */}
       <div className="editProduct">
         <Container>
           <h1>Add Product</h1>
@@ -169,25 +169,6 @@ export default function Admin_AddProduct() {
               value={form.qty}
               onChange={handleChange}
             />
-
-            <select
-              id="category"
-              name="category"
-              value={form.category}
-              onChange={handleChange}
-              required
-            >
-              <option value="" disabled selected hidden>
-                Select Category
-              </option>
-              {categories?.map((item) => (
-                <>
-                  <option className="options" value={item.name}>
-                    {item.name}
-                  </option>
-                </>
-              ))}
-            </select>
 
             <button className="btn-save">Add</button>
           </form>

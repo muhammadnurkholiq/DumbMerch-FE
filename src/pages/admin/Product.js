@@ -1,63 +1,48 @@
 import { useState, useEffect } from "react";
+import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { useQuery, useMutation } from "react-query";
 import ReactPaginate from "react-paginate";
-import { Table, Button, Modal, Container, Row, Col } from "react-bootstrap";
+import { Table, Button, Container, Row, Col } from "react-bootstrap";
 import convertRupiah from "rupiah-format";
+import ReactLoading from "react-loading";
 
 // API
-import { API } from "../config/Api";
+import { API } from "../../config/Api";
 
 // css
-import "../assets/css/Product.css";
+import "../../assets/css/admin/Product.css";
 
 // image
-import imgEmpty from "../assets/images/empty.png";
+import imgEmpty from "../../assets/images/empty.png";
 
 // components
-import AdminNavbar from "../components/navbar/AdminNavbar";
-import ModalDelete from "../components/modal/DeleteData";
+import AdminNavbar from "../../components/navbar/AdminNavbar";
+import ModalDelete from "../../components/modal/DeleteData";
 
-export default function Admin_Product() {
+export default function Product() {
   // useState
   const [idDelete, setIdDelete] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(null);
-  // Modal Confirm delete data
+  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState([]);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  // modal confirm delete data
-  const handleDelete = (id) => {
-    setIdDelete(id);
-    handleShow();
-  };
-  // If confirm is true, execute delete data
-  const deleteById = useMutation(async (id) => {
-    const config = {
-      method: "DELETE",
-      headers: {
-        Authorization: "Basic " + localStorage.token,
-      },
-    };
-    try {
-      await API.delete(`/products/${id}`, config);
-      refetch();
-    } catch (error) {
-      console.log(error);
-    }
-  });
 
   // get product
-  let { data: products, refetch } = useQuery("productsCache", async () => {
-    const config = {
-      method: "GET",
-      headers: {
-        Authorization: "Basic " + localStorage.token,
-      },
-    };
-    const response = await API.get("/products", config);
-    return response.data.data.product;
-  });
+  const getProducts = async () => {
+    try {
+      const response = await API.get("/products");
+
+      if (response.data.status === "Success") {
+        setProducts(response.data.data);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
 
   // pagination
   const [pageNumber, setPageNumber] = useState(0);
@@ -116,6 +101,33 @@ export default function Admin_Product() {
     navigate("/addProduct");
   };
 
+  // modal confirm delete data
+  const handleDelete = (id) => {
+    setIdDelete(id);
+    handleShow();
+  };
+
+  // If confirm is true, execute delete data
+  const deleteById = useMutation(async (id) => {
+    try {
+      setLoading(true);
+
+      const response = await API.delete(`/products/${id}`);
+
+      if (response.data.status === "Success") {
+        getProducts();
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  });
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
   useEffect(() => {
     if (confirmDelete) {
       // Close modal confirm delete data
@@ -128,7 +140,21 @@ export default function Admin_Product() {
 
   return (
     <>
+      {/* loading  */}
+      {loading && (
+        <div className="loadingContainer">
+          <ReactLoading
+            type="spinningBubbles"
+            color="#fff"
+            height={"20%"}
+            width={"20%"}
+            className="loading"
+          />
+        </div>
+      )}
+      {/* navbar */}
       <AdminNavbar />
+      {/* content  */}
       <div className="product">
         <Container>
           <Row>

@@ -1,20 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Container } from "react-bootstrap";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 
 // css
-import "../assets/css/Complain.css";
+import "../../assets/css/Complain.css";
 
 // components
-import GuestNavbar from "../components/navbar/GuestNavbar";
-import Chat from "../components/complain/Chat";
-import Contact from "../components/complain/Contact";
+import GuestNavbar from "../../components/navbar/GuestNavbar";
+import Chat from "../../components/complain/Chat";
+import Contact from "../../components/complain/Contact";
 
 // socket io
 import { io } from "socket.io-client";
 let socket;
 
-export default function UserComplain() {
+export default function CustomerComplain() {
   const [contact, setContact] = useState(null);
   const [contacts, setContacts] = useState([]);
 
@@ -39,7 +39,6 @@ export default function UserComplain() {
     );
 
     socket.on("new message", () => {
-      console.log("contact : ", contact);
       socket.emit("load messages", contact?.id);
     });
 
@@ -65,7 +64,6 @@ export default function UserComplain() {
 
       const dataContact = {
         ...data,
-        image: data.profile.image,
         message:
           messages.length > 0
             ? messages[messages.length - 1].message

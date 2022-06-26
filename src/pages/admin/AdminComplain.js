@@ -1,20 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { AuthContext } from "../context/AuthContext";
+
+import { AuthContext } from "../../context/AuthContext";
 
 // css
-import "../assets/css/Complain.css";
+import "../../assets/css/Complain.css";
 
 // components
-import AdminNavbar from "../components/navbar/AdminNavbar";
-import Chat from "../components/complain/Chat";
-import Contact from "../components/complain/Contact";
+import AdminNavbar from "../../components/navbar/AdminNavbar";
+import Chat from "../../components/complain/Chat";
+import Contact from "../../components/complain/Contact";
 
 // socket io
 import { io } from "socket.io-client";
 let socket;
 
-export default function Admin_Complain() {
+export default function AdminComplain() {
   const [contact, setContact] = useState(null);
   const [contacts, setContacts] = useState([]);
 
@@ -66,7 +67,6 @@ export default function Admin_Complain() {
 
       dataContacts = dataContacts.map((item) => ({
         ...item,
-        image: item.profile.image,
         message:
           item.senderMessage.length > 0
             ? item.senderMessage[item.senderMessage.length - 1].message
@@ -112,7 +112,9 @@ export default function Admin_Complain() {
 
   return (
     <>
+      {/* navbar */}
       <AdminNavbar />
+      {/* content  */}
       <div className="complain">
         <Container>
           {/* list users  */}

@@ -1,28 +1,30 @@
 // react
-import { useState } from "react";
-import { useMutation, useQuery } from "react-query";
+import { useState, useEffect } from "react";
+import { useMutation } from "react-query";
 import { NotificationManager } from "react-notifications";
 import { Card, Container, Button } from "react-bootstrap";
 import dateFormat from "dateformat";
 import convertRupiah from "rupiah-format";
+import ReactLoading from "react-loading";
 
 // API
-import { API } from "../config/Api";
+import { API } from "../../config/Api";
 
 // css
-import "../assets/css/Profile.css";
+import "../../assets/css/customer/Profile.css";
 
 // images
-import Avatar from "../assets/images/avatar.png";
+import Avatar from "../../assets/images/avatar.png";
 
 // components
-import GuestNavbar from "../components/navbar/GuestNavbar";
+import GuestNavbar from "../../components/navbar/GuestNavbar";
 
-export default function Customer_Profile() {
+export default function Profile() {
   // profile
+  let [loading, setLoading] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
   const [preview, setPreview] = useState();
-  const [image, setImage] = useState();
+  const [transactions, setTransactions] = useState([]);
   const [form, setForm] = useState({
     image: "",
     name: "",
@@ -47,25 +49,33 @@ export default function Customer_Profile() {
     }
   };
 
-  let { data: users, refetch } = useQuery("usersCache", async (e) => {
-    const response = await API.get(`/user`);
-    setForm({
-      image: response.data.data.user.image,
-      name: response.data.data.user.name,
-      email: response.data.data.user.email,
-      phone: response.data.data.user.phone,
-      gender: response.data.data.user.gender,
-      address: response.data.data.user.address,
-    });
-    setImage({
-      image: response.data.data.user.image,
-    });
-    setPreview(response.data.data.user.image);
-  });
+  // get user
+  const getUser = async () => {
+    try {
+      const response = await API.get("/user");
 
+      if (response.data.status === "Success") {
+        setForm({
+          name: response.data.data.name,
+          email: response.data.data.email,
+          phone: response.data.data.phone,
+          gender: response.data.data.gender,
+          address: response.data.data.address,
+        });
+        setPreview(response.data.data.image);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  // const handle submit
   const handleSubmit = useMutation(async (e) => {
     try {
       e.preventDefault();
+      setLoading(true);
 
       // config
       const config = {
@@ -93,8 +103,9 @@ export default function Customer_Profile() {
           response.data.status,
           3000
         );
+        setLoading(false);
         setIsEdit(false);
-        refetch();
+        getUser();
       }
     } catch (error) {
       NotificationManager.error("Server error", "Error", 3000);
@@ -102,19 +113,50 @@ export default function Customer_Profile() {
     }
   });
 
+  // const handle cancel
+  const cancelEditProfile = () => {
+    setIsEdit(false);
+  };
+
   const editProfile = () => {
     setIsEdit(true);
   };
 
   // transaction
-  let { data: transactions } = useQuery("transactionsCache", async (e) => {
-    const response = await API.get("/transactions");
-    return response.data.data;
-  });
+  const getTransactions = async () => {
+    try {
+      const response = await API.get("/transactions");
+
+      if (response.data.status === "Success") {
+        setTransactions(response.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+    getTransactions();
+  }, []);
 
   return (
     <>
+      {/* loading  */}
+      {loading && (
+        <div className="loadingContainer">
+          <ReactLoading
+            type="spinningBubbles"
+            color="#fff"
+            height={"20%"}
+            width={"20%"}
+            className="loading"
+          />
+        </div>
+      )}
+      {/* navbar */}
       <GuestNavbar />
+      {/* content */}
       <div className="profile">
         <Container>
           {/* myProfile */}
@@ -126,6 +168,12 @@ export default function Customer_Profile() {
               <div className="MyProfile-header">
                 <h1 className="profile-title">My Profile</h1>
                 <div className="profile-action">
+                  <Button
+                    onClick={cancelEditProfile}
+                    className="btn-profile btn-submit"
+                  >
+                    Cancel
+                  </Button>
                   <Button type="submit" className="btn-profile btn-submit">
                     Save Profile
                   </Button>
@@ -133,9 +181,9 @@ export default function Customer_Profile() {
               </div>
               <div className="myProfile-details">
                 {/* profile image  */}
-                {form.image === null ||
-                form.image ===
-                  "https://res.cloudinary.com/muhammad-nurkholiq/image/upload/v1654678474/null" ? (
+                {preview === null ||
+                preview ===
+                  "https://res.cloudinary.com/muhammad-nurkholiq/image/upload/v1654676551/null" ? (
                   <>
                     {preview && (
                       <div className="profile-image">
@@ -244,15 +292,15 @@ export default function Customer_Profile() {
               </div>
               <div className="myProfile-details">
                 {/* profile image  */}
-                {form.image === null ||
-                form.image ===
-                  "https://res.cloudinary.com/muhammad-nurkholiq/image/upload/v1654678474/null" ? (
+                {preview === null ||
+                preview ===
+                  "https://res.cloudinary.com/muhammad-nurkholiq/image/upload/v1654676551/null" ? (
                   <div className="profile-image">
                     <img src={Avatar} alt={form.name} loading="lazy" />
                   </div>
                 ) : (
                   <div className="profile-image">
-                    <img src={form.image} alt={form.name} loading="lazy" />
+                    <img src={preview} alt={form.name} loading="lazy" />
                   </div>
                 )}
 

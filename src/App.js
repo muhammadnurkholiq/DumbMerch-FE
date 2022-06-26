@@ -6,18 +6,15 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Auth from "./pages/Auth";
 
 // user route
-import HomePage from "./pages/Customer_HomePage";
-import CustomerComplain from "./pages/Customer_Complain";
-import DetailProduct from "./pages/Customer_DetailProduct";
-import Profile from "./pages/Customer_Profile";
+import HomePage from "./pages/customer/HomePage";
+import CustomerComplain from "./pages/customer/CustomerComplain";
+import DetailProduct from "./pages/customer/DetailProduct";
+import Profile from "./pages/customer/Profile";
 // admin route
-import AdminComplain from "./pages/Admin_Complain";
-import Category from "./pages/Admin_Category";
-import AddCategory from "./pages/Admin_AddCategory";
-import EditCategory from "./pages/Admin_EditCategory";
-import Product from "./pages/Admin_Product";
-import AddProduct from "./pages/Admin_AddProduct";
-import EditProduct from "./pages/Admin_EditProduct";
+import AdminComplain from "./pages/admin/AdminComplain";
+import Product from "./pages/admin/Product";
+import AddProduct from "./pages/admin/AddProduct";
+import EditProduct from "./pages/admin/EditProduct";
 
 // Context
 import { AuthContext } from "./context/AuthContext";
@@ -93,9 +90,6 @@ export default function App() {
       <Route path="/customerComplain" element={<CustomerComplain />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/adminComplain" element={<AdminComplain />} />
-      <Route path="/category" element={<Category />} />
-      <Route path="/addCategory" element={<AddCategory />} />
-      <Route path="/editCategory/:id" element={<EditCategory />} />
       <Route path="/product" element={<Product />} />
       <Route path="/addProduct" element={<AddProduct />} />
       <Route path="/editProduct/:id" element={<EditProduct />} />

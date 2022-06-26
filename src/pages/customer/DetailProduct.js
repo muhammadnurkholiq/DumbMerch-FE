@@ -2,30 +2,47 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-import { useQuery, useMutation } from "react-query";
+import { useMutation } from "react-query";
 import { Container, Card } from "react-bootstrap";
 import convertRupiah from "rupiah-format";
+import ReactLoading from "react-loading";
 
 // API
-import { API } from "../config/Api";
+import { API } from "../../config/Api";
 
 // css
-import "../assets/css/DetailProduct.css";
+import "../../assets/css/customer/DetailProduct.css";
 
 // components
-import GuestNavbar from "../components/navbar/GuestNavbar";
+import GuestNavbar from "../../components/navbar/GuestNavbar";
 
-export default function Customer_DetailProduct() {
+export default function DetailProduct() {
   // params
   const { id } = useParams();
+  // navigate
   let navigate = useNavigate();
+  // state
+  let [loading, setLoading] = useState(true);
+  let [products, setProducts] = useState([]);
 
-  let { data: products } = useQuery("productsCache", async () => {
-    const response = await API.get(`/products/${id}`);
-    return response.data.data.product;
-  });
+  // get product
+  const getProducts = async () => {
+    try {
+      const response = await API.get(`/products/${id}`);
+
+      if (response.data.status === "Success") {
+        setProducts(response.data.data);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
+    getProducts();
+
     //change this to the script source you want to load, for example this is snap.js sandbox env
     const midtransScriptUrl = "https://app.sandbox.midtrans.com/snap/snap.js";
     //change this according to your client-key
@@ -98,7 +115,21 @@ export default function Customer_DetailProduct() {
 
   return (
     <>
+      {/* loading  */}
+      {loading && (
+        <div className="loadingContainer">
+          <ReactLoading
+            type="spinningBubbles"
+            color="#fff"
+            height={"20%"}
+            width={"20%"}
+            className="loading"
+          />
+        </div>
+      )}
+      {/* navbar */}
       <GuestNavbar />
+      {/* content */}
       <div className="detailProduct">
         {" "}
         <Container key={products.id}>

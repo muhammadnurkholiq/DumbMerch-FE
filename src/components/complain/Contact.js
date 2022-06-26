@@ -4,8 +4,6 @@ import { Card } from "react-bootstrap";
 import avatar from "../../assets/images/avatar.png";
 
 export default function Contact({ dataContact, clickContact, contact }) {
-  console.log(dataContact);
-
   return (
     <>
       {dataContact?.length > 0 ? (
