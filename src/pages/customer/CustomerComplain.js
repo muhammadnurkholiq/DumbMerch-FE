@@ -25,7 +25,7 @@ export default function CustomerComplain() {
   useEffect(() => {
     socket = io(
       process.env.REACT_APP_SERVER_URL ||
-        "https://dumbmerch-app-backend.herokuapp.com/" ||
+        "https://dumbmerch-app-backend.herokuapp.com" ||
         "http://localhost:5000",
       {
         auth: {
